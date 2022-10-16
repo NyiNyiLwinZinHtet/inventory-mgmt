@@ -68,7 +68,8 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        $data = ['supplier'=> $supplier];
+        return view('supplier.editSupplier',$data);
     }
 
     /**
@@ -80,7 +81,13 @@ class SupplierController extends Controller
      */
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
-        //
+        $validatedRequest = $request->validated();
+        $supplier->name = trim($validatedRequest['name']);
+        $supplier->phone = trim($validatedRequest['phone']);
+        $supplier->address = trim($validatedRequest['address']);
+        $supplier->save();
+
+       return redirect()->route('supplier.index');
     }
 
     /**
@@ -91,6 +98,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+        return redirect()->route('supplier.index');
     }
 }

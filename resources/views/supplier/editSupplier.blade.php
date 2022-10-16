@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add New Supplier') }}
+            {{ __('Edit New Supplier') }}
         </h2>
     </x-slot>
 
@@ -10,11 +10,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{route('supplier.store')}}" method="post">
+                    <form action="{{route('supplier.update',['supplier' =>$supplier])}}" method="post">
                         @csrf
+
                         <div class="mb-6 w-1/2 mx-auto">
                             <label for="supplier_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Supplier Name</label>
-                            <input type="text" id="supplier_name" class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="name" required>
+                            <input type="text" id="supplier_name" class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="name" value="{{ $supplier->name }}" required>
                         </div>
                         @error('name')
                         <div class="mb-6 w-1/2 mx-auto">
@@ -26,7 +27,7 @@
 
                         <div class="mb-6 w-1/2 mx-auto">
                             <label for="supplier_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Supplier Phone</label>
-                            <input type="text" id="supplier_phone" class="@error('phone') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="phone" required>
+                            <input type="text" id="supplier_phone" class="@error('phone') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="phone" value="{{ $supplier->phone }}"required>
                         </div>
                         @error('phone')
                         <div class="mb-6 w-1/2 mx-auto">
@@ -38,7 +39,7 @@
 
                         <div class="mb-6 w-1/2 mx-auto">
                             <label for="supplier_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Supplier Address</label>
-                            <textarea name="address" id="supplier_address" cols="30" rows="10" class="@error('address') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="Enter Address"></textarea>
+                            <textarea name="address" id="supplier_address" cols="30" rows="10" class="@error('address') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="Enter Address">{{ $supplier->address }}</textarea>
                         </div>
                         @error('address')
                         <div class="mb-6 w-1/2 mx-auto">

@@ -56,8 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $data = ['category'=> $category];
-        return view('category.deleteCategory',$data);
+        //
     }
 
     /**
@@ -82,9 +81,11 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $validatedRequest = $request->validated();
-       $category->name = trim($validatedRequest['name']);
-       $category->save();
+        // dd($validatedRequest);
+        $category->name = trim($validatedRequest['name']);
 
+        $category->save();
+        // dd($category->all()->toArray());
        return redirect()->route('category.index');
     }
 

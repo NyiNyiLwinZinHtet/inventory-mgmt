@@ -13,7 +13,7 @@ class UpdateSupplierRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,30 @@ class UpdateSupplierRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => 'required|max:50',
+            'phone'=> 'required|max:14',
+            'address'=> 'required|max:255'
         ];
+    }
+
+      /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return[
+            'name.required'=> 'Supplier name is required',
+            'name.max'=> 'category name must be less than 50 characters',
+
+            'phone.required'=> 'Supplier phone is required',
+            'phone.max'=> 'Supplier Phone must be less than 14 characters',
+
+            'address.required'=> 'Supplier address is required',
+            'address.max'=> 'Supplier address must be less than 50 characters',
+
+        ];
+
     }
 }

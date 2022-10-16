@@ -45,8 +45,13 @@
                                             {{ $category->name }}
                                         </td>
                                         <td class="py-4 px-6">
-                                            <a href="{{ route('category.edit',['category' => $category ]) }}" class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            <a href="{{ route('category.show',['category' => $category ]) }}" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
+                                            <a href="{{ route('category.edit',['category' => $category ]) }}" class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <form class="inline" method="post" action="{{route('category.destroy',['category' => $category ])}}">
+                                                @csrf
+                                                @method('DELETE')
+                                            <button type="submit"> <i class="fa-solid fa-trash-can inline"></i>
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @php($count++)
