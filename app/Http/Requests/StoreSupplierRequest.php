@@ -38,9 +38,14 @@ class StoreSupplierRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'=> 'Category name is required',
-            'name.unique'=> 'Category name must be unique',
+            'name.required'=> 'Supplier name is required',
             'name.max'=> 'category name must be less than 50 characters',
+
+            'phone.required'=> 'Supplier phone is required',
+            'phone.max'=> 'Supplier Phone must be less than 14 characters',
+
+            'address.required'=> 'Supplier address is required',
+            'address.max'=> 'Supplier address must be less than 50 characters',
         ];
 
     }
