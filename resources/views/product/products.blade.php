@@ -14,26 +14,53 @@
                             New Product
                         </a>
                     </div>
-                    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
-                            <img class="rounded-t-lg" src="image-1.jpg" alt="" />
-                        </a>
-                        <div class="p-5">
-                            <a href="#">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                            </a>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                            <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Price
-                                <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+                    <br>
+                    <div class=" w-full flex flex-wrap gap-5 justify-center">
+                        @foreach ($products as $product)
+                            <div class="w-52 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700
+                            text-white hover:bg-yellow-200 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
 
+                                <a href="#" class="">
+                                    <img class="h-40 m-auto rounded-t-lg" src="{{ asset('storage/'.$product->photo) }}" alt="image" >
+                                </a>
+
+                                <div class="p-5">
+
+                                    <a href="#">
+                                        <div class="mb-2 text-sm font-medium bg-red-600 tracking-tight text-white dark:text-white">Name:{{ $product->name }}</div>
+                                    </a>
+
+                                    <a href="#" class="">
+                                        <div class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">CategoryName:{{ $product->category_name }}</div>
+                                    </a>
+
+                                    <div class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">SupplierName:{{ $product->supplier_name }}
+                                    </div>
+
+                                    <div class="inline-flex items-center py-2 px-3 text-sm text-center font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        {{ $product->price }}MMK
+
+                                    </div>
+
+                                    <form class="inline" method="post" action="{{route('product.destroy',['product' => $product ])}}">
+                                        @csrf
+                                        @method('DELETE')
+
+                                    <button type="submit" class="inline-flex items-center py-2 px-3 text-lg font-medium text-center text-white bg-red-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 justify-end"><i class="fa-solid fa-trash-can inline"></i>
+                                    </button>
+                                    </form>
+
+
+
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-
+products.blade.php
+Displaying products.blade.php.

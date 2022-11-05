@@ -21,11 +21,5 @@ class SupplierSeeder extends Seeder
             'address'=>'yangon'
         ]);
 
-        Supplier::create([
-            'name'=>'user_two',
-            'phone'=>'266666666666',
-            'address'=>'Mandalay'
-        ]);
-
     }
 }

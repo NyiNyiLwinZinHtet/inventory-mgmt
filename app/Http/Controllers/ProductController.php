@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
@@ -17,9 +18,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
-        $data = ['products'=> $products];
-        return view('product.products',$data);
+        $products = Product::Join('categories', 'products.category_id', '=', 'categories.id')
+                ->Join('suppliers', 'products.supplier_id', '=', 'suppliers.id')
+                ->select('products.*', 'categories.name as category_name', 'suppliers.name as supplier_name')
+                ->get();
+
+                return view('product.products',compact('products'));
     }
 
     /**
@@ -33,6 +37,8 @@ class ProductController extends Controller
         $supplier = Supplier::all();
 
         return view('product.newProduct',compact('category','supplier'));
+
+        // return view('product.newProduct');
     }
 
     /**
@@ -54,7 +60,7 @@ class ProductController extends Controller
 
         $product->supplier_id =trim($request->input('supplierID'));
 
-        $productPhoto = $request->file('photo')->store('product');
+        $productPhoto = $request->file('photo')->store('product','public');
 
         $product->photo=$productPhoto;
 
@@ -82,8 +88,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $data = ['product'=> $product];
-        return view('product.editProduct',$data);
+        //
     }
 
     /**
@@ -95,15 +100,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $validatedRequest = $request->validated();
-        $product->name = trim($validatedRequest['name']);
-        $product->price = trim($validatedRequest['price']);
-        $product->supplier_id = trim($validatedRequest['supplier_id']);
-        $product->category_id = trim($validatedRequest['category_id']);
-        $product->photo = trim($validatedRequest['photo']);
-        $product->save();
-
-       return redirect()->route('product.index');
+        //
     }
 
     /**
